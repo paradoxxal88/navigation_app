@@ -20,14 +20,14 @@ class _LoginScreenState extends State<LoginScreen> {
   void login() {
     if (!formKey.currentState!.validate()) return;
  
-    final valid = DemoAuth.login(
+    final isValid = DemoAuth.login(
       usernameController.text.trim(),
       passwordController.text,
     );
  
-    if (valid) {
+    if (isValid) {
       Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (_) => const MainScreen()),
+        MaterialPageRoute(builder: (context) => const MainScreen()),
       );
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -47,54 +47,65 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Login')),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(24),
-        child: Form(
-          key: formKey,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              const Icon(Icons.lock_person, size: 80, color: Color(0xFF8B7BD8)),
-              const SizedBox(height: 16),
-              const Text('Welcome Back!', textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold)),
-              const SizedBox(height: 24),
-              TextFormField(
-                controller: usernameController,
-                decoration: const InputDecoration(
-                  labelText: 'Username', border: OutlineInputBorder()),
-                validator: (value) => value == null || value.trim().isEmpty
-                    ? 'Enter your username.' : null,
-              ),
-              const SizedBox(height: 16),
-              TextFormField(
-                controller: passwordController,
-                obscureText: hidePassword,
-                decoration: InputDecoration(
-                  labelText: 'Password',
-                  border: const OutlineInputBorder(),
-                  suffixIcon: IconButton(
-                    tooltip: hidePassword ? 'Show password' : 'Hide password',
-                    icon: Icon(hidePassword
-                        ? Icons.visibility : Icons.visibility_off),
-                    onPressed: () {
-                      setState(() { hidePassword = !hidePassword; });
-                    },
+      body: Center(
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(24),
+          child: SizedBox(
+            width: 360,
+            child: Form(
+              key: formKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  const Icon(Icons.lock_person,
+                      size: 80, color: Color(0xFF8B7BD8)),
+                  const SizedBox(height: 16),
+                  const Text('Welcome Back!', textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold)),
+                  const SizedBox(height: 24),
+                  TextFormField(
+                    controller: usernameController,
+                    decoration: const InputDecoration(
+                      labelText: 'Username', border: OutlineInputBorder()),
+                    validator: (value) => value == null || value.trim().isEmpty
+                        ? 'Enter your username.' : null,
                   ),
-                ),
-                validator: (value) => value == null || value.isEmpty
-                    ? 'Enter your password.' : null,
+                  const SizedBox(height: 16),
+                  TextFormField(
+                    controller: passwordController,
+                    obscureText: hidePassword,
+                    decoration: InputDecoration(
+                      labelText: 'Password',
+                      border: const OutlineInputBorder(),
+                      suffixIcon: IconButton(
+                        tooltip:
+                            hidePassword ? 'Show password' : 'Hide password',
+                        icon: Icon(hidePassword
+                            ? Icons.visibility : Icons.visibility_off),
+                        onPressed: () {
+                          setState(() { hidePassword = !hidePassword; });
+                        },
+                      ),
+                    ),
+                    validator: (value) => value == null || value.isEmpty
+                        ? 'Enter your password.' : null,
+                  ),
+                  const SizedBox(height: 24),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      minimumSize: const Size.fromHeight(56),
+                    ),
+                    onPressed: login, child: const Text('Login')),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (_) => const RegisterScreen()));
+                    },
+                    child: const Text("Don't have an account? Register"),
+                  ),
+                ],
               ),
-              const SizedBox(height: 24),
-              ElevatedButton(onPressed: login, child: const Text('Login')),
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                    builder: (_) => const RegisterScreen()));
-                },
-                child: const Text("Don't have an account? Register"),
-              ),
-            ],
+            ),
           ),
         ),
       ),

@@ -1,8 +1,21 @@
 import 'package:flutter/material.dart';
- 
+import 'package:sionillo_navigation_app/auth/demo_auth.dart';
+import 'package:sionillo_navigation_app/screen/login_screen.dart';
+
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
- 
+
+  void logout(BuildContext context) {
+    DemoAuth.logout();
+
+    Navigator.of(context).pushAndRemoveUntil(
+      MaterialPageRoute(
+        builder: (context) => const LoginScreen(),
+      ),
+      (route) => false,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,6 +73,14 @@ class ProfilePage extends StatelessWidget {
                   subtitle: Text('j.ssionillo.558815@umindanao.edu.ph'),
                 ),
               ],
+            ),
+          ),
+          const SizedBox(height: 24),
+          Center(
+            child: ElevatedButton.icon(
+              onPressed: () => logout(context),
+              icon: const Icon(Icons.logout),
+              label: const Text('Logout'),
             ),
           ),
         ],

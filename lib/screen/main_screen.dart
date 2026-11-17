@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:sionillo_navigation_app/auth/demo_auth.dart';
 import 'package:sionillo_navigation_app/page/home_page.dart';
 import 'package:sionillo_navigation_app/page/profile_page.dart';
-import 'package:sionillo_navigation_app/page/social_media_page.dart';
-
+import 'package:sionillo_navigation_app/social_media/social_media.dart';
 import 'calculator_screen.dart';
 
 
@@ -17,12 +17,21 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   int selectedIndex = 0;
  
-  final List<Widget> pages = const [
-    HomePage(),
-    CalculatorScreen(),
-    ProfilePage(),
-    SocialMediaPage(),
-  ];
+
+  late final List<Widget> pages;
+  @override
+  void initState(){
+    super.initState(); 
+
+    pages =[
+      const HomePage(),
+      const CalculatorScreen(),
+      const ProfilePage(),
+      SocialMediaPage(
+        username: DemoAuth.currentUsername!,
+        ),
+    ];
+  }
  
   @override
   Widget build(BuildContext context) {
