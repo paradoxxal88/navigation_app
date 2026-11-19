@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sionillo_navigation_app/auth/demo_auth.dart';
+import 'demo_auth.dart';
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
  
@@ -14,11 +14,23 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final confirmController = TextEditingController();
  
   void register() {
-    if (!formKey.currentState!.validate()) return;
+    if (!formKey.currentState!.validate()) {
+      return;
+    }
+
     DemoAuth.register(
-      usernameController.text.trim(), passwordController.text);
-    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-      content: Text('Registration successful! You can now log in.')));
+      usernameController.text.trim(),
+      passwordController.text,
+    );
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text(
+          'Registration successful! You can now log in.',
+        ),
+      ),
+    );
+
     Navigator.of(context).pop();
   }
  

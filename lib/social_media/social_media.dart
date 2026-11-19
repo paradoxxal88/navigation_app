@@ -84,4 +84,3 @@ class _SocialMediaPageState extends State<SocialMediaPage> {
     );
   }
 }
- 

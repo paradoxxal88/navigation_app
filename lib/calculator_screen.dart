@@ -124,6 +124,7 @@ Widget build(BuildContext context) {
  
           TextField(
             controller: firstNumberController,
+            style: const TextStyle(color: Colors.white),
             keyboardType: const TextInputType.numberWithOptions(
               decimal: true,
               signed: true,
@@ -151,6 +152,7 @@ Widget build(BuildContext context) {
  
           TextField(
             controller: secondNumberController,
+            style: const TextStyle(color: Colors.white),
             keyboardType: const TextInputType.numberWithOptions(
               decimal: true,
               signed: true,

@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:sionillo_navigation_app/auth/demo_auth.dart';
-import 'package:sionillo_navigation_app/screen/login_screen.dart';
+import 'demo_auth.dart';
+import 'login_screen.dart';
 
 class ProfilePage extends StatelessWidget {
-  const ProfilePage({super.key});
+  final String username;
+
+  const ProfilePage({
+    super.key,
+    required this.username,
+  });
 
   void logout(BuildContext context) {
     DemoAuth.logout();
@@ -20,7 +25,7 @@ class ProfilePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Profile'),
+        title: const Text('Student Profile'),
       ),
       body: ListView(
         padding: const EdgeInsets.all(24),
@@ -45,6 +50,7 @@ class ProfilePage extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 16),
+
           const Text(
             'JUNA LEI G. SIONILLO',
             textAlign: TextAlign.center,
@@ -53,10 +59,17 @@ class ProfilePage extends StatelessWidget {
               fontWeight: FontWeight.bold,
             ),
           ),
+          const SizedBox(height: 8),
+
+          Text(
+            'Logged in as: $username',
+            textAlign: TextAlign.center,
+          ),
           const SizedBox(height: 24),
-          Card(
+
+          const Card(
             child: Column(
-              children: const [
+              children: [
                 ListTile(
                   leading: Icon(Icons.badge),
                   title: Text('Student ID'),
@@ -76,12 +89,11 @@ class ProfilePage extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 24),
-          Center(
-            child: ElevatedButton.icon(
-              onPressed: () => logout(context),
-              icon: const Icon(Icons.logout),
-              label: const Text('Logout'),
-            ),
+
+          ElevatedButton.icon(
+            onPressed: () => logout(context),
+            icon: const Icon(Icons.logout),
+            label: const Text('Logout'),
           ),
         ],
       ),

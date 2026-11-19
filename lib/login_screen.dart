@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sionillo_navigation_app/auth/demo_auth.dart';
+import 'demo_auth.dart';
 
 import 'main_screen.dart';
 import 'register_screen.dart';
@@ -18,7 +18,9 @@ class _LoginScreenState extends State<LoginScreen> {
   bool hidePassword = true;
  
   void login() {
-    if (!formKey.currentState!.validate()) return;
+    if (!formKey.currentState!.validate()) {
+      return;
+    }
  
     final isValid = DemoAuth.login(
       usernameController.text.trim(),
@@ -27,11 +29,15 @@ class _LoginScreenState extends State<LoginScreen> {
  
     if (isValid) {
       Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => const MainScreen()),
+        MaterialPageRoute(
+          builder: (context) => const MainScreen(),
+        ),
       );
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Invalid username or password.')),
+        const SnackBar(
+          content: Text('Invalid username or password.'),
+        ),
       );
     }
   }
